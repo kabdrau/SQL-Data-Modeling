@@ -1,0 +1,142 @@
+Deparments
+-
+id PK serial
+name varchar(50)
+phone int
+address text
+
+Doctors
+-
+id PK serial
+f_name varchar(30)
+l_name varchar(30)
+role varchar(50)
+email varchar(50)
+department_id int FK >- Deparments.id
+
+Patients
+-
+id PK serial
+f_name varchar(30)
+l_name varchar(30)
+dob date
+insurance varchar(50)
+phone int
+gender NULL varchar(10)
+email NULL varchar(50)
+address NULL text
+
+Visits
+-
+id PK serial
+patient_id int FK >- Patients.id
+doctor_id int FK >- Doctors.id
+date date
+time time
+result text
+
+Diseases
+-
+id PK serial
+name varchar(50)
+description text
+symptoms text
+treatment text
+
+Diagnoses
+-
+id PK serial
+visit_id int FK >- Visits.id
+disease_id int FK >- Diseases.id
+condition NULL varchar(50)
+
+
+Regions
+-
+id PK serial
+name varchar(50)
+timezone varchar(10)
+
+Users
+-
+id PK serial
+username UNIQUE varhcar(50)
+password varchar(50)
+email varchar(50)
+date_created date
+
+Categories
+-
+id PK serial
+name varchar(50)
+description NULL text
+
+Posts
+-
+id PK serial FK >- Categories.id
+title varchar(50)
+text text
+username text FK >- Users.username
+date_time timestamp
+location varchar(50)
+category_id int
+location_id int FK >- Regions.id
+
+
+Teams
+-
+id PK serial
+name varchar(50)
+city varchar(50)
+founded date
+coach varchar(50)
+
+Players
+-
+id PK serial
+f_name varchar(30)
+l_name varchar(30)
+dob date
+height int
+weight int
+position varchar(20)
+team_id int FK >- Teams.id
+
+Referees
+-
+id PK serial
+f_name varchar(30)
+l_name varchar(30)
+dob date
+
+Seasons
+-
+year int PK
+start_date date
+end_date date
+
+Game
+-
+id int PK
+team1 int FK >- Teams.id
+team2 int FK >- Teams.id
+referee_id int FK >- Referees.id
+date date
+stadium varchar(50)
+info NULL text
+season int FK >- Seasons.year
+
+Goals
+-
+id PK serial
+player_id int FK >- Players.id
+game_id int FK >- Game.id
+time_min int
+
+Results
+-
+id PK serial
+team_id int FK >- Teams.id
+game_id int FK >- Game.id
+result varchar(10)
+point int
